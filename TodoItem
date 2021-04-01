@@ -1,11 +1,15 @@
-//TodoItem.js
+//TodoItem.js  ***********************************************************************************************************************************
 
 import React from "react"
 
 function TodoItem(props) {
     return (
         <div className="todo-item">
-            <input type="checkbox" checked={props.item.completed}/>
+            <input 
+                type="checkbox" 
+                checked={props.item.completed} 
+                onChange={() => props.handleChange(props.item.id)}
+            />
             <p>{props.item.text}</p>
         </div>
     )
@@ -15,19 +19,54 @@ export default TodoItem
 
 
 
-//App.js
-iimport React from "react"
+//App.js ***********************************************************************************************************************************
+  
+ * Challenge: 
+ * 1. Create an event handler in the App component for when the checkbox is clicked (which is an `onChange` event)
+ *    a. This method will be the trickest part. Check the comments in the stubbed-out method below for some pseudocode to help guide you through this part
+ * 2. Pass the method down to the TodoItem component
+ * 3. In the TodoItem component, make it so when the `onChange` event happens, it calls the `handleChange` method and passes the id of the todo into the function
+ */
+
+import React from "react"
 import TodoItem from "./TodoItem"
 import todosData from "./todosData"
 
-function App() {
-    const todoItems = todosData.map(item => <TodoItem key={item.id} item={item}/>)
+class App extends React.Component {
+    constructor() {
+        super()
+        this.state = {
+            todos: todosData
+        }
+        this.handleChange = this.handleChange.bind(this)
+    }
     
-    return (
-        <div className="todo-list">
-            {todoItems}
-        </div>
-    )
+    handleChange(id) {
+        this.setState(prevState => {
+            const updatedTodos = prevState.todos.map(todo => {
+                if (todo.id === id) {
+                    return {
+                        ...todo,
+                        completed: !todo.completed
+                    }
+                }
+                return todo
+            })
+            return {
+                todos: updatedTodos
+            }
+        })
+    }
+    
+    render() {
+        const todoItems = this.state.todos.map(item => <TodoItem key={item.id} item={item} handleChange={this.handleChange}/>)
+        
+        return (
+            <div className="todo-list">
+                {todoItems}
+            </div>
+        )    
+    }
 }
 
 export default App
@@ -35,7 +74,7 @@ export default App
 
 
 
-//TodosData.js
+//TodosData.js ***********************************************************************************************************************************
 const todosData = [
     {
         id: 1,
@@ -71,7 +110,7 @@ export default todosData
 
 
 
-//Index.js
+//Index.js ***********************************************************************************************************************************
 
 mport React from "react"
 import ReactDOM from "react-dom"
@@ -83,7 +122,7 @@ ReactDOM.render(<App />, document.getElementById("root"))
 
 
 
-//index.html
+//index.html ***********************************************************************************************************************************
 <html>
     <head>
         <link rel="stylesheet" href="style.css">
@@ -99,7 +138,7 @@ ReactDOM.render(<App />, document.getElementById("root"))
 
 
 
-//style.css
+//style.css ***********************************************************************************************************************************
 body {
     background-color: whitesmoke;
 }
