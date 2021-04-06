@@ -1,7 +1,7 @@
 # Exercise-REACT
 
 React features/topics to learn:
- * 
+ 
  * Official React Context API - https://reactjs.org/docs/context.html
  * Error Boundaries - https://reactjs.org/docs/error-boundaries.html
  * render props - https://reactjs.org/docs/render-props.html
