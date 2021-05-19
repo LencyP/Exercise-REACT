@@ -9,3 +9,5 @@ React features/topics to learn:
  * React Router - https://reacttraining.com/react-router/core/guides/philosophy
  * React Hooks - https://reactjs.org/docs/hooks-intro.html
  * React lazy, memo, and Suspense - https://reactjs.org/blog/2018/10/23/react-v-16-6.html
+ * https://reactjs.org/docs/state-and-lifecycle.html
+ * https://reactjs.org/docs/components-and-props.html
